@@ -20,6 +20,7 @@ interface Props {
   gift: Gift;
   onClose: () => void;
   onSolved: (solvedRank: number) => void;
+  onFinale: () => void;
   isUnlocked: boolean;
   isCompleted: boolean;
   isLastGift: boolean;
@@ -30,6 +31,7 @@ export const GiftDetailModal: React.FC<Props> = ({
   gift,
   onClose,
   onSolved,
+  onFinale,
   isCompleted: initialCompleted,
   isLastGift,
   focusedModalIndex
@@ -341,7 +343,7 @@ export const GiftDetailModal: React.FC<Props> = ({
                 </p>
               </div>
 
-              {/* Action Bar: single exit back to the map, never a jump to the next gift */}
+              {/* Action Bar: back to the map; the last gift goes to the finale screen instead */}
               <div className={`flex items-center pt-3 border-t border-slate-800 gap-5 ${isLastGift ? 'justify-between' : 'justify-end'}`}>
                 {isLastGift && (
                   <p className="text-slate-400 tv-text-base max-w-md">
@@ -352,7 +354,12 @@ export const GiftDetailModal: React.FC<Props> = ({
                 <button
                   onClick={() => {
                     soundEngine.playSelect();
-                    onClose();
+                    // The last gift chains into the final congrats screen.
+                    if (isLastGift) {
+                      onFinale();
+                    } else {
+                      onClose();
+                    }
                   }}
                   className={`px-8 py-4 rounded-xl font-black tv-text-xl shadow-xl transition-all flex items-center gap-3 cursor-pointer whitespace-nowrap ${
                     focusedModalIndex === 1 ? 'scale-105 ring-8 ring-amber-300 shadow-[0_0_40px_rgba(245,158,11,0.9)]' : ''

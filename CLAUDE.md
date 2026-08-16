@@ -24,18 +24,19 @@ There is **no test suite** and **no type-check step**. `.ts`/`.tsx` files are tr
 
 ## Architecture
 
-**Single state machine in `src/App.tsx`.** `currentView` (`'welcome' | 'map' | 'modal'`) selects which of three mutually exclusive screens renders. All other components are presentational and receive state + callbacks as props. There is no router, no context, no state library.
+**Single state machine in `src/App.tsx`.** `currentView` (`'welcome' | 'map' | 'modal' | 'finale'`) selects which of four mutually exclusive screens renders. All other components are presentational and receive state + callbacks as props. There is no router, no context, no state library.
 
 **Progression state is in-memory only** — `unlockedLevel`, `completedLevels`, `focusedLevelId`. Nothing is persisted (no localStorage), so a page reload restarts the experience — that reload is the only way to reset progress, since the on-screen control bar was removed.
 
 **Levels are identified by `importanceRank` (1–3), not by `id`.** Every lookup, unlock check, and focus comparison uses `importanceRank`. The `3` is hardcoded in several places (`App.tsx` unlock/finish logic, `isLastGift`, confetti trigger in `GiftDetailModal`, "REGALO SUPREMO" label in `LevelMap`) — adding a fourth gift means updating all of them.
 
-**The modal never chains into the next gift.** Answering a challenge correctly calls `onSolved(rank)` → `handleGiftSolved` in `App.tsx`, which marks the level complete, raises `unlockedLevel`, and moves `focusedLevelId` to the next card — but leaves the modal on the gift just revealed. The only forward action is the "VOLVER AL INICIO" button (and Escape / the X), which returns to the map with the next level already focused, so Jess selects it herself with the D-Pad. Do not reintroduce an auto-advance path.
+**The modal never chains into the next gift.** Answering a challenge correctly calls `onSolved(rank)` → `handleGiftSolved` in `App.tsx`, which marks the level complete, raises `unlockedLevel`, and moves `focusedLevelId` to the next card — but leaves the modal on the gift just revealed. The only forward action is the "VOLVER AL INICIO" button (and Escape / the X), which returns to the map with the next level already focused, so Jess selects it herself with the D-Pad. Do not reintroduce an auto-advance path. The one exception: the last gift's action button ("¡DISFRUTÉMOSLO!") calls `onFinale` and opens `FinalScreen.tsx`, the final congratulations screen with the cat photos (`src/assets/cats/`).
 
 **All keyboard input is handled by one `handleKeyDown` in `App.tsx`**, attached to `window`. Child components never listen for keys. The handler branches on `currentView`:
 - welcome: any of Enter/Space/Right/Down → map
 - map: arrows move `focusedLevelId` (Right/Left step by 1, Down/Up step by 2 for the grid); Enter opens the gift only if `focusedLevelId <= unlockedLevel`
 - modal: Escape/Backspace closes; arrows cycle `focusedModalIndex` 0→1→2
+- finale: Escape/Backspace/Enter/Space → map
 
 Note the modal branch does **not** handle Enter/Space — `focusedModalIndex` only drives focus rings (index 1 = the "VOLVER AL INICIO" button, index 2 = the X), and the buttons are activated by `onClick`. Any work on remote-driven modal interaction has to add the activation path there; Escape is currently the reliable remote exit.
 

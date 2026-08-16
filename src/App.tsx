@@ -3,11 +3,12 @@ import { GIFTS_DATA, Gift } from './data/giftsData';
 import { BackgroundParticles } from './components/BackgroundParticles';
 import { LevelMap } from './components/LevelMap';
 import { GiftDetailModal } from './components/GiftDetailModal';
+import { FinalScreen } from './components/FinalScreen';
 import { soundEngine } from './utils/audio';
 import { Sparkles, Crown, ChevronRight } from 'lucide-react';
 
 export function App() {
-  const [currentView, setCurrentView] = useState<'welcome' | 'map' | 'modal'>('welcome');
+  const [currentView, setCurrentView] = useState<'welcome' | 'map' | 'modal' | 'finale'>('welcome');
   const [unlockedLevel, setUnlockedLevel] = useState<number>(1);
   const [completedLevels, setCompletedLevels] = useState<number[]>([]);
   const [activeGiftModal, setActiveGiftModal] = useState<Gift | null>(null);
@@ -45,6 +46,12 @@ export function App() {
     setCurrentView('map');
   };
 
+  // The last gift's "¡DISFRUTÉMOSLO!" button opens the final congrats screen.
+  const handleOpenFinale = () => {
+    setActiveGiftModal(null);
+    setCurrentView('finale');
+  };
+
   // Keyboard / TV Remote D-Pad Navigation Event Listener
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const key = e.key;
@@ -76,6 +83,15 @@ export function App() {
         setFocusedModalIndex((prev) => (prev + 1) % 3);
       } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
         setFocusedModalIndex((prev) => (prev - 1 + 3) % 3);
+      }
+      return;
+    }
+
+    // FINALE VIEW CONTROLS
+    if (currentView === 'finale') {
+      if (key === 'Escape' || key === 'Backspace' || key === 'Enter' || key === ' ') {
+        soundEngine.playSelect();
+        setCurrentView('map');
       }
       return;
     }
@@ -162,11 +178,16 @@ export function App() {
           gift={activeGiftModal}
           onClose={handleReturnHome}
           onSolved={handleGiftSolved}
+          onFinale={handleOpenFinale}
           isUnlocked={activeGiftModal.importanceRank <= unlockedLevel}
           isCompleted={completedLevels.includes(activeGiftModal.importanceRank)}
           isLastGift={activeGiftModal.importanceRank === 3}
           focusedModalIndex={focusedModalIndex}
         />
+      )}
+      {/* VIEW 4: FINAL CONGRATS SCREEN */}
+      {currentView === 'finale' && (
+        <FinalScreen onClose={handleReturnHome} />
       )}
     </div>
   );

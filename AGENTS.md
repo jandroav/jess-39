@@ -46,9 +46,9 @@ and enabling GitHub Pages on the `gh-pages` branch first (see README.md).
 ## Architecture
 
 **Single state machine in `src/App.tsx`.** `currentView`
-(`'welcome' | 'map' | 'modal'`) selects which of three mutually exclusive
-screens renders. All other components are presentational and receive state +
-callbacks as props. There is no router, no context, no state library.
+(`'welcome' | 'map' | 'modal' | 'finale'`) selects which of four mutually
+exclusive screens renders. All other components are presentational and receive
+state + callbacks as props. There is no router, no context, no state library.
 
 **Progression state is in-memory only** — `unlockedLevel`, `completedLevels`,
 `focusedLevelId`. Nothing is persisted (no localStorage); a page reload restarts
@@ -68,7 +68,10 @@ raises `unlockedLevel`, pre-focuses the next card on the map), and — only for
 the gift just revealed; the only forward action is the back-to-map button
 (labelled "VOLVER AL INICIO"/"SIGUIENTE PARIDI" style) and Escape / the X, so
 Jess selects the next level herself with the D-Pad. Do not reintroduce an
-auto-advance path.
+auto-advance path. The one exception: on the last gift (`isLastGift`) the action
+button ("¡DISFRUTÉMOSLO!") calls `onFinale` instead of `onClose` and opens
+`FinalScreen.tsx` — the final congratulations screen with the cat photos
+(`src/assets/cats/`, converted from HEIC to JPEG) and a one-shot confetti burst.
 
 **All keyboard input is handled by one `handleKeyDown` in `App.tsx`**, attached
 to `window`. Child components never listen for keys. The handler branches on
@@ -78,6 +81,7 @@ to `window`. Child components never listen for keys. The handler branches on
 - map: arrows move `focusedLevelId` (Right/Left step by 1, Down/Up step by 2 for
   the grid); Enter/Space opens the gift only if `focusedLevelId <= unlockedLevel`
 - modal: Escape/Backspace closes; arrows cycle `focusedModalIndex` 0→1→2
+- finale: Escape/Backspace/Enter/Space → map
 
 The modal branch does **not** handle Enter/Space — `focusedModalIndex` only
 drives focus rings (index 1 = the back-to-map button, index 2 = the X), and the
