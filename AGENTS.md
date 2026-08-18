@@ -133,6 +133,12 @@ Fonts and sets `lang="es"`.
   focused element), and the `fadeIn` / `pulseGlow` animations. Focus is
   expressed with these classes or Tailwind `ring-*` utilities — native
   `*:focus { outline: none }` is globally disabled.
+- **TV browser zoom compensation.** Samsung's browser is often left at 110–125%
+  zoom, shrinking the CSS viewport (1080px → ~864px) while fixed-px paddings and
+  icons keep their size, so the modal's `94vh` box clips its action bar.
+  `index.css` applies `zoom: 0.9` / `0.8` to `#root` via `max-height` media
+  queries (1000px / 900px) so the layout always behaves as designed at ~1080px.
+  Keep this in mind when testing in a desktop browser with a short window.
 - **The gift modal must never scroll and must never clip.** It is fixed at
   `h-[94vh]` with `overflow-hidden`, so anything that does not fit is silently
   cut off — there is no scrollbar to save you. Three mechanisms keep that

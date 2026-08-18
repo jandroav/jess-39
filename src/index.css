@@ -46,6 +46,20 @@
   padding-bottom: max(1.5rem, 2vh);
 }
 
+/* TV browser zoom compensation. Samsung's browser is often left at 110–125%
+   zoom, which shrinks the CSS viewport (a 1080px-tall UI becomes ~864px) while
+   fixed-px paddings, icons and card min-heights keep their size — so the
+   modal's fixed 94vh box clips the action bar and the map cards overflow.
+   Scaling the app down uniformly restores the designed ~1080px layout.
+   `zoom` (Blink) also scales vh units inside the subtree, which is exactly
+   what we want here; the TV browser is Chromium-based. */
+@media (max-height: 1000px) {
+  #root { zoom: 0.9; }
+}
+@media (max-height: 900px) {
+  #root { zoom: 0.8; }
+}
+
 /* Custom Animations */
 @keyframes fadeIn {
   from {
