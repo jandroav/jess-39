@@ -63,14 +63,14 @@ export const SizingNote: React.FC<Props> = ({ onClose }) => {
 
       <div className="w-full space-y-3 mb-6">
         <p className="tv-text-lg text-slate-200 leading-snug">
-          Un anillo que mide todo eso no se puede elegir a ojo. Los sensores leen la sangre a través
-          de la piel y tienen que ir <strong className="text-white">pegados a tu dedo</strong>: si el
-          anillo baila un milímetro, pierden el contacto y los datos dejan de valer.
+          El Oura Ring no viene en tallas aproximadas. Es una joya de titanio que vas a llevar día y
+          noche, así que se elige <strong className="text-white">tu medida exacta</strong> para que se
+          sienta como si no llevaras nada puesto.
         </p>
         <p className="tv-text-lg text-slate-200 leading-snug">
-          Por eso Oura no envía el anillo directamente. Primero manda ese <strong className="text-white">kit
-          de tallaje</strong> que acabas de recibir: ocho anillos de prueba que se llevan un día entero,
-          con su noche incluida, porque los dedos cambian de tamaño mientras duermes.
+          Por eso Oura empieza siempre por ese <strong className="text-white">kit de tallaje</strong> que
+          acabas de recibir: ocho anillos de prueba para encontrar tu talla perfecta. Se lleva un día
+          entero, con su noche, y con esa medida se prepara el tuyo.
         </p>
         <p className="tv-text-xl font-bold text-amber-200 border-l-4 border-amber-400 pl-5">
           Así que hoy no te regalo un anillo. Te regalo el principio de uno hecho a tu medida.
