@@ -9,7 +9,7 @@ import { soundEngine } from './utils/audio';
 import { Sparkles, Crown, ChevronRight } from 'lucide-react';
 
 export function App() {
-  const [currentView, setCurrentView] = useState<'welcome' | 'map' | 'modal' | 'finale' | 'nota'>('nota');
+  const [currentView, setCurrentView] = useState<'welcome' | 'map' | 'modal' | 'finale' | 'nota'>('welcome');
   const [unlockedLevel, setUnlockedLevel] = useState<number>(1);
   const [completedLevels, setCompletedLevels] = useState<number[]>([]);
   const [activeGiftModal, setActiveGiftModal] = useState<Gift | null>(null);

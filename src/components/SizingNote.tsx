@@ -47,7 +47,7 @@ export const SizingNote: React.FC<Props> = ({ onClose }) => {
         <img
           src={ouraRingBlack}
           alt="Oura Ring 5 en negro"
-          className="h-[24vh] w-auto object-cover rounded-2xl border-2 border-amber-400/60 shadow-[0_0_40px_rgba(245,158,11,0.3)]"
+          className="h-[28vh] w-auto object-cover rounded-2xl border-2 border-amber-400/60 shadow-[0_0_40px_rgba(245,158,11,0.3)]"
         />
 
         <div className="flex-1 flex flex-col justify-center gap-2.5">
