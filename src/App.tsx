@@ -4,11 +4,12 @@ import { BackgroundParticles } from './components/BackgroundParticles';
 import { LevelMap } from './components/LevelMap';
 import { GiftDetailModal } from './components/GiftDetailModal';
 import { FinalScreen } from './components/FinalScreen';
+import { SizingNote } from './components/SizingNote';
 import { soundEngine } from './utils/audio';
 import { Sparkles, Crown, ChevronRight } from 'lucide-react';
 
 export function App() {
-  const [currentView, setCurrentView] = useState<'welcome' | 'map' | 'modal' | 'finale'>('welcome');
+  const [currentView, setCurrentView] = useState<'welcome' | 'map' | 'modal' | 'finale' | 'nota'>('nota');
   const [unlockedLevel, setUnlockedLevel] = useState<number>(1);
   const [completedLevels, setCompletedLevels] = useState<number[]>([]);
   const [activeGiftModal, setActiveGiftModal] = useState<Gift | null>(null);
@@ -52,6 +53,26 @@ export function App() {
     setCurrentView('finale');
   };
 
+  // The Oura gift hands over a sizing kit instead of the ring, so its button
+  // opens the note that explains why. From there Jess returns to the map.
+  const handleOpenSizingNote = () => {
+    setActiveGiftModal(null);
+    setCurrentView('nota');
+  };
+
+  // What the modal's main button does. Shared with the OK/Enter key below so
+  // the same action works from the remote and from a click.
+  const handleModalPrimaryAction = () => {
+    if (!activeGiftModal) return;
+    if (activeGiftModal.importanceRank === 3) {
+      handleOpenFinale();
+    } else if (activeGiftModal.hasSizingNote) {
+      handleOpenSizingNote();
+    } else {
+      handleReturnHome();
+    }
+  };
+
   // Keyboard / TV Remote D-Pad Navigation Event Listener
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const key = e.key;
@@ -79,10 +100,34 @@ export function App() {
         return;
       }
 
+      if (key === 'Enter' || key === ' ') {
+        // Only once the gift is revealed: during the challenge the options are
+        // still picked by click, and OK must not skip the quiz.
+        const rank = activeGiftModal?.importanceRank;
+        if (rank && completedLevels.includes(rank)) {
+          soundEngine.playSelect();
+          if (focusedModalIndex === 2) {
+            handleReturnHome();
+          } else {
+            handleModalPrimaryAction();
+          }
+        }
+        return;
+      }
+
       if (key === 'ArrowRight' || key === 'ArrowDown') {
         setFocusedModalIndex((prev) => (prev + 1) % 3);
       } else if (key === 'ArrowLeft' || key === 'ArrowUp') {
         setFocusedModalIndex((prev) => (prev - 1 + 3) % 3);
+      }
+      return;
+    }
+
+    // SIZING NOTE VIEW CONTROLS
+    if (currentView === 'nota') {
+      if (key === 'Escape' || key === 'Backspace' || key === 'Enter' || key === ' ') {
+        soundEngine.playSelect();
+        setCurrentView('map');
       }
       return;
     }
@@ -113,7 +158,7 @@ export function App() {
         }
       }
     }
-  }, [currentView, focusedLevelId, unlockedLevel]);
+  }, [currentView, focusedLevelId, unlockedLevel, activeGiftModal, completedLevels, focusedModalIndex]);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -178,14 +223,19 @@ export function App() {
           gift={activeGiftModal}
           onClose={handleReturnHome}
           onSolved={handleGiftSolved}
-          onFinale={handleOpenFinale}
+          onPrimaryAction={handleModalPrimaryAction}
           isUnlocked={activeGiftModal.importanceRank <= unlockedLevel}
           isCompleted={completedLevels.includes(activeGiftModal.importanceRank)}
           isLastGift={activeGiftModal.importanceRank === 3}
           focusedModalIndex={focusedModalIndex}
         />
       )}
-      {/* VIEW 4: FINAL CONGRATS SCREEN */}
+      {/* VIEW 4: SIZING NOTE (después del Oura, con el kit ya en sus manos) */}
+      {currentView === 'nota' && (
+        <SizingNote onClose={handleReturnHome} />
+      )}
+
+      {/* VIEW 5: FINAL CONGRATS SCREEN */}
       {currentView === 'finale' && (
         <FinalScreen onClose={handleReturnHome} />
       )}

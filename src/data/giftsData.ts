@@ -58,6 +58,7 @@ export interface Gift {
   photoSrc?: string; // Real photo; replaces the SVG illustration
   photoFit?: 'cover' | 'contain'; // 'contain' for documents that must not be cropped
   photoLabel?: string; // Headline shown above the photo
+  hasSizingNote?: boolean; // Opens the sizing-note screen instead of returning to the map
 }
 
 export const GIFTS_DATA: Gift[] = [
@@ -222,6 +223,7 @@ export const GIFTS_DATA: Gift[] = [
     bgGlow: 'rgba(245, 158, 11, 0.3)',
     icon: 'Sparkles',
     importanceRank: 2,
+    hasSizingNote: true, // El anillo se pide por tallaje: la nota lo explica
     visualType: 'ring',
     photoSrc: ouraRingBlack
   },

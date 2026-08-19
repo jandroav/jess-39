@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Gift } from '../data/giftsData';
 import { GiftVisual } from './GiftVisual';
 import { soundEngine } from '../utils/audio';
-import { Sparkles, Heart, CheckCircle2, ChevronRight, X, Home, Activity, Compass, Feather, Zap, HeartPulse, Moon, Thermometer, Award, Utensils, Wine, ShieldCheck, HelpCircle, AlertCircle, Flame } from 'lucide-react';
+import { Sparkles, Heart, CheckCircle2, ChevronRight, X, Home, Ruler, Activity, Compass, Feather, Zap, HeartPulse, Moon, Thermometer, Award, Utensils, Wine, ShieldCheck, HelpCircle, AlertCircle, Flame } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 /**
@@ -20,7 +20,7 @@ interface Props {
   gift: Gift;
   onClose: () => void;
   onSolved: (solvedRank: number) => void;
-  onFinale: () => void;
+  onPrimaryAction: () => void; // Main button: finale, sizing note or back to the map
   isUnlocked: boolean;
   isCompleted: boolean;
   isLastGift: boolean;
@@ -31,7 +31,7 @@ export const GiftDetailModal: React.FC<Props> = ({
   gift,
   onClose,
   onSolved,
-  onFinale,
+  onPrimaryAction,
   isCompleted: initialCompleted,
   isLastGift,
   focusedModalIndex
@@ -344,22 +344,22 @@ export const GiftDetailModal: React.FC<Props> = ({
               </div>
 
               {/* Action Bar: back to the map; the last gift goes to the finale screen instead */}
-              <div className={`flex items-center pt-3 border-t border-slate-800 gap-5 ${isLastGift ? 'justify-between' : 'justify-end'}`}>
+              <div className={`flex items-center pt-3 border-t border-slate-800 gap-5 ${isLastGift || gift.hasSizingNote ? 'justify-between' : 'justify-end'}`}>
                 {isLastGift && (
                   <p className="text-slate-400 tv-text-base max-w-md">
                     ¡Ya has descubierto los 3 páridis! Feliz cumpleaños, mi amor. ❤️
+                  </p>
+                )}
+                {gift.hasSizingNote && !isLastGift && (
+                  <p className="text-slate-400 tv-text-base max-w-md">
+                    Hoy no hay anillo que desenvolver, y hay un motivo. Lee esto antes de seguir.
                   </p>
                 )}
 
                 <button
                   onClick={() => {
                     soundEngine.playSelect();
-                    // The last gift chains into the final congrats screen.
-                    if (isLastGift) {
-                      onFinale();
-                    } else {
-                      onClose();
-                    }
+                    onPrimaryAction();
                   }}
                   className={`px-8 py-4 rounded-xl font-black tv-text-xl shadow-xl transition-all flex items-center gap-3 cursor-pointer whitespace-nowrap ${
                     focusedModalIndex === 1 ? 'scale-105 ring-8 ring-amber-300 shadow-[0_0_40px_rgba(245,158,11,0.9)]' : ''
@@ -371,10 +371,14 @@ export const GiftDetailModal: React.FC<Props> = ({
                 >
                   {isLastGift ? (
                     <Heart className="w-7 h-7 fill-current" />
+                  ) : gift.hasSizingNote ? (
+                    <Ruler className="w-7 h-7 stroke-[3]" />
                   ) : (
                     <Home className="w-7 h-7 stroke-[3]" />
                   )}
-                  <span>{isLastGift ? '¡DISFRUTÉMOSLO!' : 'SIGUIENTE PARIDI'}</span>
+                  <span>
+                    {isLastGift ? '¡DISFRUTÉMOSLO!' : gift.hasSizingNote ? 'ABRE TU NOTA' : 'SIGUIENTE PARIDI'}
+                  </span>
                 </button>
               </div>
             </div>
