@@ -70,7 +70,7 @@ export const GIFTS_DATA: Gift[] = [
     category: 'SALUD & ANATOMÍA',
     title: 'Zapatillas Barefoot',
     subtitle: 'Conexión Biomecánica & Postura Natural',
-    shortRiddle: '¿Sabías que el pie humano tiene 26 huesos y +200,000 terminaciones nerviosas para sentir la tierra, pero el calzado rígido los encarcela?',
+    shortRiddle: '¿Sabías que hay una parte de tu cuerpo que le habla a tu cerebro todo el día, contándole dónde estás y cómo te sostienes? Llevas media vida sin dejarla hablar.',
     challenge: {
       question: '¿Qué estructura biológica posee 26 huesos, 33 articulaciones y +200,000 terminaciones nerviosas para conectar con el suelo?',
       options: [
