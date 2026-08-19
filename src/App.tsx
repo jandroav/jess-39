@@ -136,7 +136,7 @@ export function App() {
           </div>
 
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-rose-400 tracking-tighter leading-none mb-6">
-            JESS 39
+            JESS treintaytodos
           </h1>
 
           <p className="text-3xl md:text-4xl font-serif italic text-slate-200 mb-4">
@@ -144,7 +144,7 @@ export function App() {
           </p>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mb-12">
-            Prepara el mando de tu televisión. Hoy viviremos una aventura interactiva para descubrir tus regalos de cumpleaños paso a paso.
+            Prepara el mando la "televisión". Hoy viviremos una aventura interactiva para descubrir tus regalos de cumpleaños paso a paso.
           </p>
 
           <button
@@ -155,7 +155,7 @@ export function App() {
             className="px-14 py-7 text-3xl font-black rounded-3xl bg-gradient-to-r from-amber-400 via-amber-500 to-rose-400 text-slate-950 shadow-[0_0_60px_rgba(245,158,11,0.8)] hover:scale-105 transition-all flex items-center gap-4 cursor-pointer tv-focused"
           >
             <Sparkles className="w-10 h-10 fill-current" />
-            <span>PRESIONA OK PARA INICIAR LA AVENTURA</span>
+            <span>PRESIONA PARA INICIAR LA AVENTURA</span>
             <ChevronRight className="w-10 h-10 stroke-[3]" />
           </button>
         </div>

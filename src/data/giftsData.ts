@@ -133,7 +133,7 @@ export const GIFTS_DATA: Gift[] = [
       iconName: 'Flame'
     },
     healthImpact: 'Alineación postural impecable, fuerza muscular en pies y ligereza natural en cada paso.',
-    husbandNote: '¡Mi amor! Quiero que camines por la vida con la máxima libertad, ligereza y salud desde las raíces. ¡Disfruta de caminar como la naturaleza diseñó!',
+    husbandNote: 'Quiero que camines por la vida con la máxima libertad, ligereza y salud desde las raíces. ¡Disfruta de caminar como la naturaleza diseñó!',
     badgeText: 'Paso 1: Fundamentos de la Salud',
     accentColor: '#10b981',
     bgGlow: 'rgba(16, 185, 129, 0.25)',
@@ -147,9 +147,9 @@ export const GIFTS_DATA: Gift[] = [
     mysteryTitle: 'Misión 2: El Guardián Biomédico',
     mysterySubtitle: 'Reto de Alta Tecnología & Diagnóstico',
     category: 'TECNOLOGÍA DE SALUD',
-    title: 'Oura Ring 5 · Negro',
+    title: 'Oura Ring 5',
     subtitle: 'Black Edition · El Anillo de Salud Más Avanzado del Mundo',
-    shortRiddle: '¿En qué lugar del cuerpo la señal del pulso arterial es infinitamente más limpia para medir la salud médica con 99% de precisión?',
+    shortRiddle: '¿Sabías que tu corazón late 100.000 veces al día y que el tiempo entre latido y latido delata tu estrés antes de que tú lo notes?',
     challenge: {
       question: '¿En qué punto del cuerpo la señal del pulso infrarrojo es hasta 100 veces más nítida para medir la frecuencia cardíaca y el HRV con precisión médica?',
       options: [
@@ -216,7 +216,7 @@ export const GIFTS_DATA: Gift[] = [
       iconName: 'Activity'
     },
     healthImpact: 'Autoconocimiento biomédico total, seguimiento circadiano de precisión y salud preventiva de lujo.',
-    husbandNote: '¡El regalo tecnológico de tus sueños! El Oura Ring 5 en negro te acompañará como una joya elegante mientras descifra los secretos de tu salud.',
+    husbandNote: '¡El regalo tecnológico definitivo! El Oura Ring 5 te acompañará como una joya elegante mientras descifra los secretos de tu salud.',
     badgeText: 'Paso 2: Tecnología Biomédica de Vanguardia',
     accentColor: '#f59e0b',
     bgGlow: 'rgba(245, 158, 11, 0.3)',
@@ -278,7 +278,7 @@ export const GIFTS_DATA: Gift[] = [
       {
         pillar: '💛 Recuerdo',
         title: 'Una Noche Para los Dos',
-        description: 'La celebración de tus 39 con la que soñabas.',
+        description: 'La celebración de tus 39, juntos.',
         stat: 'Para los dos',
         iconName: 'Heart'
       }
@@ -290,7 +290,7 @@ export const GIFTS_DATA: Gift[] = [
       iconName: 'Heart'
     },
     healthImpact: 'Nutrición para la mente y el alma, liberación de dopamina y la creación de un recuerdo imborrable.',
-    husbandNote: '¡El broche de oro para tu 39 cumpleaños! Una noche mágica de gala y amor disfrutando la mejor gastronomía del planeta solo para los dos.',
+    husbandNote: '¡El broche de oro para tu cumpleaños! Una noche mágica disfrutando la mejor gastronomía del planeta solo para los dos.',
     badgeText: 'Paso 3: Experiencia Suprema & Celebración',
     accentColor: '#f43f5e',
     bgGlow: 'rgba(244, 63, 94, 0.35)',

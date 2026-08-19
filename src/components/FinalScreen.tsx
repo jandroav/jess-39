@@ -26,7 +26,7 @@ export const FinalScreen: React.FC<Props> = ({ onClose }) => {
       </div>
 
       <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-rose-400 tracking-tighter leading-none mb-6">
-        ¡FELIZ CUMPLEAÑOS, JESS!
+        ¡FELIZ CUMPLEAÑOS!
       </h1>
 
       <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mb-6 font-medium">
@@ -47,7 +47,7 @@ export const FinalScreen: React.FC<Props> = ({ onClose }) => {
 
       <p className="text-lg md:text-xl text-amber-200/90 font-bold mb-8 flex items-center gap-2">
         <Heart className="w-6 h-6 fill-rose-400 text-rose-400" />
-        Y la familia peluda también te adora 🐾
+         🐾
         <Heart className="w-6 h-6 fill-rose-400 text-rose-400" />
       </p>
 
