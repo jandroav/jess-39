@@ -144,7 +144,7 @@ export function App() {
           </p>
 
           <p className="text-xl md:text-2xl text-slate-400 max-w-3xl mb-12">
-            Prepara el mando la "televisión". Hoy viviremos una aventura interactiva para descubrir tus regalos de cumpleaños paso a paso.
+            Prepara el mando la "televisión". Hoy viviremos una aventura interactiva para descubrir tus páridis de cumpleaños paso a paso.
           </p>
 
           <button

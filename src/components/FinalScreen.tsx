@@ -30,7 +30,7 @@ export const FinalScreen: React.FC<Props> = ({ onClose }) => {
       </h1>
 
       <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mb-6 font-medium">
-        Has descubierto todos los regalos, pero el mejor regalo es tenerte con nosotros.
+        Has descubierto todos los páridis, pero el mejor regalo es tenerte con nosotros.
         Te queremos más de lo que las palabras pueden decir.
       </p>
 

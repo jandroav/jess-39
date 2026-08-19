@@ -347,7 +347,7 @@ export const GiftDetailModal: React.FC<Props> = ({
               <div className={`flex items-center pt-3 border-t border-slate-800 gap-5 ${isLastGift ? 'justify-between' : 'justify-end'}`}>
                 {isLastGift && (
                   <p className="text-slate-400 tv-text-base max-w-md">
-                    ¡Ya has descubierto los 3 regalos! Feliz cumpleaños, mi amor. ❤️
+                    ¡Ya has descubierto los 3 páridis! Feliz cumpleaños, mi amor. ❤️
                   </p>
                 )}
 
