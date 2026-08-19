@@ -330,11 +330,11 @@ export const GiftDetailModal: React.FC<Props> = ({
                 }}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <h5 className="tv-text-lg font-black flex items-center gap-2" style={{ color: gift.accentColor }}>
-                    {getIcon(gift.brutalFact.iconName)}
+                  <h5 className="tv-text-lg font-black flex items-center gap-2 min-w-0" style={{ color: gift.accentColor }}>
+                    <span className="shrink-0">{getIcon(gift.brutalFact.iconName)}</span>
                     <span>{gift.brutalFact.title}</span>
                   </h5>
-                  <span className="tv-text-base font-black px-3 py-1 rounded-full bg-amber-400 text-slate-950 shadow whitespace-nowrap">
+                  <span className="tv-text-base font-black px-3 py-1 rounded-full bg-amber-400 text-slate-950 shadow whitespace-nowrap shrink-0">
                     {gift.brutalFact.highlight}
                   </span>
                 </div>
